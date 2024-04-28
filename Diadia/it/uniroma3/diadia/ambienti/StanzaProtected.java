@@ -14,21 +14,21 @@ import it.uniroma3.diadia.IOConsole;
  * @version base
 */
 
-public class Stanza {
+public class StanzaProtected {
 	
-	static final private int NUMERO_MASSIMO_DIREZIONI = 4; // 4 direzioni, nord sud est ed ovest
-	static final private int NUMERO_MASSIMO_ATTREZZI = 10; // al massimo 10 attrezzi per stanza
+	static final protected int NUMERO_MASSIMO_DIREZIONI = 4; // 4 direzioni, nord sud est ed ovest
+	static final protected int NUMERO_MASSIMO_ATTREZZI = 10; // al massimo 10 attrezzi per stanza
 	
-	private String nome; // ha un nome
-    private Attrezzo[] attrezzi; // un array di attrezzi
-    private int numeroAttrezzi; // il numero di attrezzi presenti nella stanza
-    private Stanza[] stanzeAdiacenti; // un array di stanze adiacenti
-    private int numeroStanzeAdiacenti; // il numero di stanze adiacenti alla stanza
-	private String[] direzioni; // un array di direzioni possibili
-	private IO io = new IOConsole();
+	protected String nome; // ha un nome
+    protected Attrezzo[] attrezzi; // un array di attrezzi
+    protected int numeroAttrezzi; // il numero di attrezzi presenti nella stanza
+    protected Stanza[] stanzeAdiacenti; // un array di stanze adiacenti
+    protected int numeroStanzeAdiacenti; // il numero di stanze adiacenti alla stanza
+	protected String[] direzioni; // un array di direzioni possibili
+	protected IO io = new IOConsole();
     
  
-    public Stanza(String nome) { // crea una stanza
+    public StanzaProtected(String nome) { // crea una stanza
         this.nome = nome; // avrà il nome che gli passo come parametro
         this.numeroStanzeAdiacenti = 0; // all'inizio il numero delle stanze adiacenti è 0
         this.numeroAttrezzi = 0; // all'inizio il numero degli attrezzi è 0
@@ -89,7 +89,7 @@ public class Stanza {
 
     public String toString() { // ritorna una rappresentazione in stringa della stanza corrente(descrizione, uscite e eventuali attrezzi)
     	StringBuilder risultato = new StringBuilder(); 
-    	risultato.append("Ti trovi in: " + this.nome); // stampa il nome della stanza
+    	risultato.append(this.nome); // stampa il nome della stanza
     	risultato.append("\nUscite: ");
     	for (String direzione : this.direzioni)
     		if (direzione!=null)
@@ -106,11 +106,9 @@ public class Stanza {
 		boolean trovato;
 		trovato = false; // all'inizio l'oggetto non è stato trovato
 		for (Attrezzo attrezzo : this.attrezzi) {
-			if (attrezzo != null)
-				if (attrezzo.getNome().equals(nomeAttrezzo)) // se il nome dell'attrezzo eguaglia il nome dell'attrezzo
-																// passato per parametro
-					trovato = true; // allora l'ho trovato
-			return trovato; // ritorno trovato = true
+			if (attrezzo.getNome().equals(nomeAttrezzo)) // se il nome dell'attrezzo eguaglia il nome dell'attrezzo passato per parametro
+				trovato = true; // allora l'ho trovato
+			    return trovato; // ritorno trovato = true
 		}
 		return trovato; //ritorno il valore booleano di trovato
 	}
@@ -136,7 +134,7 @@ public class Stanza {
 				    removeElement(this.attrezzi, i);
 				    numeroAttrezzi--;
 				    io.mostraMessaggio("Ho rimosso " + attrezzo + " dalla stanza.");
-				    io.mostraMessaggio("Ho aggiunto " + attrezzo + " alla tua borsa.");
+				    io.mostraMessaggio("Ho aggiunto " + attrezzo + " alla tua borsa");
 			    }
 			else 
 				io.mostraMessaggio("Non esiste un attrezzo di nome " + attrezzo + " nella stanza.");

@@ -1,6 +1,7 @@
 package it.uniroma3.diadia.giocatore;
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.IOConsole;
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Borsa {
@@ -9,14 +10,14 @@ public class Borsa {
 	private int numeroAttrezzi; // numero di attrezzi nella borsa
 	private int pesoMax; // peso massimo della borsa
 	private Labirinto labirinto;
-	private IOConsole console;
+	private IO io;
 
 	public Borsa() {
 		this(DEFAULT_PESO_MAX_BORSA);
 		this.attrezzi = new Attrezzo[10]; 
 		this.numeroAttrezzi = 0;
 		this.labirinto = new Labirinto();
-		this.console = new IOConsole();
+		this.io = new IOConsole();
 	}
 
 	public Borsa(int pesoMax) {
@@ -62,6 +63,12 @@ public class Borsa {
 
 		return peso;
 	}
+	
+	public boolean getPesoRimanente(Attrezzo a) {
+		if(a != null && this.getPesoMax()-this.getPeso()>=a.getPeso())
+			return true;
+		return false; 
+	}
 
 	public boolean isEmpty() {
 		return this.numeroAttrezzi == 0;
@@ -79,12 +86,12 @@ public class Borsa {
 			    	a = this.attrezzi[i];
 				    labirinto.getStanzaCorrente().removeElement(this.attrezzi, i);
 				    numeroAttrezzi--;
-				    console.mostraMessaggio("Ho rimosso " + nomeAttrezzo + " dalla borsa.");
+				    io.mostraMessaggio("Ho rimosso " + nomeAttrezzo + " dalla borsa.");
 			    }
 			else 
-				console.mostraMessaggio("Non esiste un attrezzo di nome " + nomeAttrezzo + " nella borsa.");
+				io.mostraMessaggio("Non esiste un attrezzo di nome " + nomeAttrezzo + " nella borsa.");
 		}
-		if(nomeAttrezzo==null) console.mostraMessaggio("Non hai inserito alcun attrezzo.");
+		if(nomeAttrezzo==null) io.mostraMessaggio("Non hai inserito alcun attrezzo.");
 		return a;
 	}
 

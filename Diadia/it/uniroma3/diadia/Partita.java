@@ -28,6 +28,10 @@ public class Partita {
 		return this.labirinto;
 	}
 	
+	public void setLabirinto(Labirinto labirinto) {
+		this.labirinto = labirinto;
+	}
+	
 	public Giocatore getGiocatore() {
 		return this.giocatore;
 	}
