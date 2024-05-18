@@ -3,12 +3,13 @@ package it.uniroma3.diadia;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 
 public class PartitaTest {
 	
 	private Partita partita(int cfu, Stanza stanzaCorrente, Stanza stanzaVincente) {
-		Partita game = new Partita();
+		Partita game = new Partita(new Labirinto());
 		game.getGiocatore().setCfu(cfu);
 		game.getLabirinto().setStanzaCorrente(stanzaCorrente);
 		game.getLabirinto().setStanzaVincente(stanzaVincente);

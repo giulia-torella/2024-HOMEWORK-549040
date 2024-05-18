@@ -1,31 +1,27 @@
 package it.uniroma3.diadia.ambienti;
 
-import it.uniroma3.diadia.attrezzi.Attrezzo;
-
 public class Labirinto {
 	
 	private Stanza stanzaCorrente; 
 	private Stanza stanzaVincente; 
 	
-	public Labirinto() {
-		creaStanze();
+	public static LabirintoBuilder newBuilder() {
+		return new LabirintoBuilder();
 	}
 	
+	/*
 	private void creaStanze() { 
 
-		/* crea gli attrezzi */
     	Attrezzo lanterna = new Attrezzo("lanterna",3); 
 		Attrezzo osso = new Attrezzo("osso",1);
 		Attrezzo piedediporco = new Attrezzo("piedediporco", 2);
     	
-		/* crea stanze del labirinto */
 		Stanza atrio = new Stanza("Atrio");
 		Stanza aulaN11 = new StanzaMagica("Aula N11");
 		Stanza aulaN10 = new StanzaBloccata("Aula N10", "est", "piedediporco");
 		Stanza laboratorio = new StanzaBuia("Laboratorio Campus", "lanterna");
 		Stanza biblioteca = new Stanza("Biblioteca");
 		
-		/* collega le stanze */
 		atrio.impostaStanzaAdiacente("nord", biblioteca);
 		atrio.impostaStanzaAdiacente("est", aulaN11);
 		atrio.impostaStanzaAdiacente("sud", aulaN10);
@@ -41,17 +37,18 @@ public class Labirinto {
 
 		aulaN10.addAttrezzo(lanterna); 
 		atrio.addAttrezzo(osso);
-		laboratorio.addAttrezzo(piedediporco);
+		aulaN11.addAttrezzo(piedediporco);
 
         stanzaCorrente = atrio;  
 		stanzaVincente = biblioteca;
-    }
+    } */
 	
 	public Stanza getStanzaVincente() { 
-		return stanzaVincente;
+		return this.stanzaVincente;
 	}
 	
 	public void setStanzaVincente(Stanza stanzaVincente) { 
+		this.stanzaVincente = stanzaVincente;
 	}
 	
 	public Stanza getStanzaCorrente() { 

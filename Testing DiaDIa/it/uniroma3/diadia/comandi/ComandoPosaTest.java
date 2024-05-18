@@ -2,38 +2,49 @@ package it.uniroma3.diadia.comandi;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.attrezzi.*;
 
 import org.junit.Test;
 
 public class ComandoPosaTest {
+	private Labirinto labirinto;
+	private Comando posa;
+	private Partita partita;
+	private Attrezzo attrezzo;
+	private IO io;
 	
-	private ComandoPosa posa = new ComandoPosa();
-	private Partita p = new Partita();
-	
-	private void setting() {
-		posa.setIO(new IOConsole());
-		posa.setParametro("osso");
+	@Before
+	public void setUp() {
+		labirinto = new LabirintoBuilder()
+				.addStanzaIniziale("Atrio")
+				.getLabirinto();
+		partita = new Partita(labirinto);
+		io = new IOConsole();
+		posa = new ComandoPosa();
+		posa.setIO(io);
+		attrezzo = new Attrezzo("lanterna", 3);
 	}
 	
 	@Test
 	public void testAttrezzoNonPosato() {
-		posa = new ComandoPosa();
-		setting();
 		posa.setParametro("lanterna");
-		posa.esegui(p);
-		assertFalse(p.getLabirinto().getStanzaCorrente().hasAttrezzo("lanterna"));
+		posa.esegui(partita);
+		assertFalse(partita.getLabirinto().getStanzaCorrente().hasAttrezzo("lanterna"));
 	}
 
 	@Test
 	public void testAttrezzoPosato() {
-		setting();
-		p.getGiocatore().getBorsa().addAttrezzo(new Attrezzo("osso", 1));
-		posa.esegui(p);
-		assertTrue(p.getLabirinto().getStanzaCorrente().hasAttrezzo("osso"));
+		partita.getGiocatore().getBorsa().addAttrezzo(attrezzo);
+		posa.setParametro("lanterna");
+		posa.esegui(partita);
+		assertTrue(partita.getLabirinto().getStanzaCorrente().hasAttrezzo("lanterna"));
 	}
 	
 	

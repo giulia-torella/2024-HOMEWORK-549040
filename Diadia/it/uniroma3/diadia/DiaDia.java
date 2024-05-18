@@ -1,4 +1,6 @@
 package it.uniroma3.diadia;
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.comandi.*;
 
 /**
@@ -25,9 +27,13 @@ public class DiaDia {
 	private Partita partita;
 	private IO io;
 
-	public DiaDia(IO io) {
-		this.io = io;
-		this.partita = new Partita();
+	public DiaDia(IO console, Labirinto labirinto) {
+		this.io = console;
+		this.partita = new Partita(labirinto);
+	}
+	
+	public static String mostraMessaggioBenvenuto() {
+		return MESSAGGIO_BENVENUTO;
 	}
 
 	public void gioca() {
@@ -55,8 +61,30 @@ public class DiaDia {
 
 
 	public static void main(String[] argc) {
-		IO io = new IOConsole();
-		DiaDia gioco = new DiaDia(io);
+		IO console = new IOConsole();
+		Labirinto labirinto = new LabirintoBuilder()
+										.addStanzaIniziale("Atrio")
+										.addAttrezzo("osso", 1)
+										.addStanzaVincente("Biblioteca")
+										.addStanzaMagica("Aula N11")
+										.addAttrezzo("piedediporco", 2)
+										.addStanzaBloccata("Aula N10", "piedediporco", "est")
+										.addAttrezzo("lanterna", 3)
+										.addStanzaBuia("Laboratorio Campus", "lanterna")
+										.addAdiacente("Atrio", "Biblioteca", "nord")
+										.addAdiacente("Atrio", "Aula N11", "est")
+										.addAdiacente("Atrio", "Aula N10", "sud")
+										.addAdiacente("Atrio", "Laboratorio Campus", "ovest")
+										.addAdiacente("Aula N11", "Laboratorio Campus", "est")
+										.addAdiacente("Aula N11", "Atrio", "ovest")
+										.addAdiacente("Aula N10", "Atrio", "nord")
+										.addAdiacente("Aula N10", "Aula N11", "est")
+										.addAdiacente("Aula N10", "Laboratorio Campus", "ovest")
+										.addAdiacente("Laboratorio Campus", "Atrio", "est")
+										.addAdiacente("Laboratorio Campus", "Aula N11", "ovest")
+										.addAdiacente("Biblioteca", "Atrio", "sud")
+										.getLabirinto();
+		DiaDia gioco = new DiaDia(console, labirinto);
 		gioco.gioca();
 	}
 }

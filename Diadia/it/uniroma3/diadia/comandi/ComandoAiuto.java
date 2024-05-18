@@ -11,7 +11,6 @@ public class ComandoAiuto implements Comando {
 
 	@Override
 	public void esegui(Partita partita) {
-		io.mostraMessaggio("Questi sono i comandi che puoi utilizzare:\n");
 		for(int i=0; i< ELENCO_COMANDI.length; i++) 
 			io.mostraMessaggio(ELENCO_COMANDI[i]+" ");
 		io.mostraMessaggio("");

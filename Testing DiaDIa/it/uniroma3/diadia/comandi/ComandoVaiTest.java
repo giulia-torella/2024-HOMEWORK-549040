@@ -2,7 +2,10 @@ package it.uniroma3.diadia.comandi;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 
+import it.uniroma3.diadia.IO;
+import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.*;
 
@@ -11,43 +14,42 @@ import org.junit.Test;
 public class ComandoVaiTest {
 	
 	private Partita p;
-	private ComandoVai comandoVai;
+	private Comando vai;
+	private Labirinto labirinto;
+	private IO io;
+	private Stanza N11;
+	private Stanza atrio;
 	
-	private Partita setting(String nomeCorrente, String nomeAdiacente) {
-		p = new Partita();
-		comandoVai = new ComandoVai();
-		comandoVai.setDirezione("nord");
-		p.getLabirinto().setStanzaCorrente(new Stanza(nomeCorrente));
-		p.getLabirinto().getStanzaCorrente().impostaStanzaAdiacente(comandoVai.getDirezione(), new Stanza(nomeAdiacente));
-		comandoVai.esegui(p);
-		return p;
+	@Before
+	public void setUp() {
+		labirinto = new LabirintoBuilder()
+				.addStanzaIniziale("Atrio")
+				.addAdiacente("Atrio", "Aula N11", "ovest")
+				.getLabirinto();
+		io = new IOConsole();
+		p = new Partita(labirinto);
+		vai = new ComandoVai();
+		vai.setIO(io);
+		N11 = new Stanza("Aula N11");
+		atrio = new Stanza("Atrio");
 	}
 	
-	private Partita setting(String nomeCorrente, String nomeAdiacente, String direzione) {
-		p = new Partita();
-		comandoVai = new ComandoVai();
-		comandoVai.setDirezione("sud");
-		p.getLabirinto().setStanzaCorrente(new Stanza(nomeCorrente));
-		p.getLabirinto().getStanzaCorrente().impostaStanzaAdiacente(direzione, new Stanza(nomeAdiacente));
-		comandoVai.esegui(p);
-		return p;
-	}
-
-	/* Controlla che la stanza corrente da atrio diventi poi biblioteca */
 	@Test
 	public void testEsegui() {
-		assertEquals(setting("Atrio", "Biblioteca").getLabirinto().getStanzaCorrente().getNome(), new Stanza("Biblioteca").getNome());
-	}
-	
-	/* Controlla che al passaggio da atrio a biblioteca perdo un CFU */
-	@Test
-	public void testEseguiCFU() {
-		assertEquals(setting("Atrio", "Biblioteca").getGiocatore().getCfu(), 19);
+		p.getLabirinto().setStanzaCorrente(atrio);
+		atrio.impostaStanzaAdiacente("ovest", N11);
+		vai.setParametro("ovest");
+		vai.esegui(p);
+		assertEquals(N11, p.getLabirinto().getStanzaCorrente());
 	}
 	
 	@Test
-	public void testNonEsegui2() {
-		assertNotEquals(setting("Atrio", "Biblioteca", "ovest").getLabirinto().getStanzaCorrente().getNome(), new Stanza("Biblioteca").getNome());
+	public void testNonEsegui() {
+		p.getLabirinto().setStanzaCorrente(atrio);
+		atrio.impostaStanzaAdiacente("ovest", N11);
+		vai.setParametro("sud");
+		vai.esegui(p);
+		assertEquals(atrio, p.getLabirinto().getStanzaCorrente());
 	}
 	
 

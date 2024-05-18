@@ -1,7 +1,5 @@
 package it.uniroma3.diadia.ambienti;
 
-import it.uniroma3.diadia.attrezzi.Attrezzo;
-
 public class StanzaBloccata extends Stanza{
 	
 	private String direzioneBloccata;
@@ -31,16 +29,11 @@ public class StanzaBloccata extends Stanza{
     	risultato.append("Ti trovi in: " + super.getNome()); 
     	risultato.append("\nSi tratta di una stanza bloccata..");
     	risultato.append("\nLe direzioni disponibili sono: ");
-    	for (String direzione : this.getDirezioni())
-    		if (direzione!=null)
-    			risultato.append(" " + direzione);
+    	risultato.append(this.getDirezioni().toString());
     	risultato.append("\nLa direzione bloccata è " + direzioneBloccata + " e "
     			+ "può essere sbloccata solo dall'attrezzo " + attrezzoSbloccante);
     	risultato.append("\nAttrezzi nella stanza: ");
-    	for (Attrezzo attrezzo : this.getAttrezzi()) {
-    		if(attrezzo!=null)
-    		    risultato.append(attrezzo.toString()+" "); 
-    	}
+    	risultato.append(this.getAttrezzi().toString());
     	return risultato.toString(); 
     }
 

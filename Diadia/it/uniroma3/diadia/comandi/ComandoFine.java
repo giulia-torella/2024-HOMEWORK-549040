@@ -6,12 +6,17 @@ import it.uniroma3.diadia.Partita;
 public class ComandoFine implements Comando {
 	
 	private final static String NOME = "fine";
+	private final static String MESSAGGIO_FINALE = "Grazie per aver giocato!";
 	private IO io;
 
 	@Override
 	public void esegui(Partita partita) {
 		partita.setFinita();
-		io.mostraMessaggio("Grazie per aver giocato!");
+		io.mostraMessaggio(MESSAGGIO_FINALE);
+	}
+	
+	public static String mostraMessaggioFinale() {
+		return MESSAGGIO_FINALE;
 	}
 
 	@Override

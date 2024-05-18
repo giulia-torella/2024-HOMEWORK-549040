@@ -18,10 +18,10 @@ public class Partita {
 	private Labirinto labirinto;
 	private Giocatore giocatore;
 	
-	public Partita(){
-		this.labirinto = new Labirinto();
-		this.finita = false; // all'inizio la partita non è finita, false
-		this.giocatore = new Giocatore(); // i cfu posseduti all'inizio sono proprio i cfu iniziali
+	public Partita(Labirinto labirinto){
+		this.labirinto = labirinto;
+		giocatore = new Giocatore();
+		this.finita = false;
 	}
 	
 	public Labirinto getLabirinto() {
