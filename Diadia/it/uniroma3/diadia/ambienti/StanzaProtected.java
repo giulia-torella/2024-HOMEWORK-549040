@@ -1,6 +1,9 @@
 package it.uniroma3.diadia.ambienti;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+
+import java.util.Scanner;
+
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 
@@ -25,7 +28,7 @@ public class StanzaProtected {
     protected Stanza[] stanzeAdiacenti; // un array di stanze adiacenti
     protected int numeroStanzeAdiacenti; // il numero di stanze adiacenti alla stanza
 	protected String[] direzioni; // un array di direzioni possibili
-	protected IO io = new IOConsole();
+	protected IO io;
     
  
     public StanzaProtected(String nome) { // crea una stanza
@@ -35,6 +38,8 @@ public class StanzaProtected {
         this.direzioni = new String[NUMERO_MASSIMO_DIREZIONI]; // le direzioni possibili saranno un'array con lunghezza il num max delle direzioni
         this.stanzeAdiacenti = new Stanza[NUMERO_MASSIMO_DIREZIONI]; // le stanze adiacenti saranno un'array con lunghezza il num max delle direzioni
         this.attrezzi = new Attrezzo[NUMERO_MASSIMO_ATTREZZI]; // gli attrezzi saranno un'array con lunghezza il num max degli attrezzi possibili
+        Scanner scanner = new Scanner(System.in);
+		io = new IOConsole(scanner);
     }
 
     public void impostaStanzaAdiacente(String direzione, Stanza stanza) { // passo la direzione in cui voglio metterla e la stanza che sarà adiacente in quella direzione

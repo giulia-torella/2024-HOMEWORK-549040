@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeMap;
@@ -12,11 +13,12 @@ import java.util.TreeSet;
 
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
+import it.uniroma3.diadia.Proprieta;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.attrezzi.ComparatorePeso;
 
 public class Borsa {
-	public final static int DEFAULT_PESO_MAX_BORSA = 10; // peso massimo della borsa
+	static final private int DEFAULT_PESO_MAX_BORSA = Proprieta.getPesoMax();
 	private Map<String, Attrezzo> nome2attrezzi;
 	private int numeroAttrezzi; // numero di attrezzi nella borsa
 	private int pesoMax; // peso massimo della borsa
@@ -32,7 +34,8 @@ public class Borsa {
 		this.nome2attrezzi = new TreeMap<>();
 		this.numeroAttrezzi = 0;
 		this.peso = 0;
-		this.io = new IOConsole();
+		Scanner scanner = new Scanner(System.in);
+		io = new IOConsole(scanner);
 	}
 
 	public boolean addAttrezzo(Attrezzo attrezzo) {

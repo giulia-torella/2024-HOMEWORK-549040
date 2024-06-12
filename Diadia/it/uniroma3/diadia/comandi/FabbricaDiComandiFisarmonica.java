@@ -12,6 +12,7 @@ public class FabbricaDiComandiFisarmonica implements FabbricaDiComandi{
 	}
 	
 	public Comando costruisciComando(String istruzione) {
+		@SuppressWarnings("resource")
 		Scanner scannerDiParole = new Scanner(istruzione);
 		String nomeComando = null;
 		String parametro = null;
@@ -34,6 +35,12 @@ public class FabbricaDiComandiFisarmonica implements FabbricaDiComandi{
 		else if (nomeComando.equals("fine"))
 			comando = new ComandoFine();
 		else if (nomeComando.equals("guarda"))
+			comando = new ComandoGuarda();
+		else if (nomeComando.equals("saluta"))
+			comando = new ComandoGuarda();
+		else if (nomeComando.equals("regala"))
+			comando = new ComandoGuarda();
+		else if (nomeComando.equals("interagisci"))
 			comando = new ComandoGuarda();
 		else comando = new ComandoNonValido();
 		comando.setParametro(parametro);

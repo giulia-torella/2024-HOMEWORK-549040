@@ -1,12 +1,10 @@
 package it.uniroma3.diadia.comandi;
 
-import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.*;
 
-public class ComandoPrendi implements Comando {
+public class ComandoPrendi extends AbstractComando{
 
-	private IO io;
 	private String nomeAttrezzo;
 	private final static String NOME = "prendi";
 
@@ -25,9 +23,9 @@ public class ComandoPrendi implements Comando {
 			partita.getLabirinto().getStanzaCorrente().removeAttrezzo(a);
 		} 
 		else {
-			if(nomeAttrezzo == null) io.mostraMessaggio("Non hai specificato alcun attrezzo da prendere.");
-			else if(!aggiunto && nomeAttrezzo!=null) io.mostraMessaggio("L'attrezzo che hai digitato non esiste nella stanza.");
-			else io.mostraMessaggio("Attrezzo troppo pesante per entrare nella borsa!");
+			if(nomeAttrezzo == null) this.getIo().mostraMessaggio("Non hai specificato alcun attrezzo da prendere.");
+			else if(!aggiunto && nomeAttrezzo!=null) this.getIo().mostraMessaggio("L'attrezzo che hai digitato non esiste nella stanza.");
+			else this.getIo().mostraMessaggio("Attrezzo troppo pesante per entrare nella borsa!");
 		}
 	}
 
@@ -40,11 +38,6 @@ public class ComandoPrendi implements Comando {
 	@Override
 	public String getParametro() {
 		return this.nomeAttrezzo;
-	}
-
-	@Override
-	public void setIO(IO io) {
-		this.io = io;
 	}
 	
 	@Override

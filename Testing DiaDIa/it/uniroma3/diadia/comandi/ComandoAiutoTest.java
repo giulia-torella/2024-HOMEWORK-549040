@@ -22,10 +22,10 @@ public class ComandoAiutoTest {
 	}
 
 	@Test
-	public void testPartitaAiuto() {
+	public void testPartitaAiuto() throws Exception {
 		righeDaLeggere.add("aiuto");
 		righeDaLeggere.add("fine");
-		IOSimulator io = Simulatore.simulazionePartita2(righeDaLeggere);
+		IOSimulator io = Simulatore.Gioco1(righeDaLeggere);
 		assertTrue(io.hasNextMessaggio());
 		assertEquals(DiaDia.mostraMessaggioBenvenuto(), io.nextMessaggio());
 		for(int i=0; i < ComandoAiuto.ELENCO_COMANDI.length; i++) {

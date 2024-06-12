@@ -1,13 +1,11 @@
 package it.uniroma3.diadia.comandi;
 
-import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.Partita;
 
-public class ComandoPosa implements Comando {
+public class ComandoPosa extends AbstractComando{
 	
 	private final static String NOME = "posa";
-	private IO io;
 	private String nomeAttrezzo;
 
 	@Override
@@ -16,13 +14,13 @@ public class ComandoPosa implements Comando {
 		if(partita.getLabirinto().getStanzaCorrente().getNumeroAttrezziPossibili()>0) {
 			partita.getGiocatore().getBorsa().removeAttrezzo(nomeAttrezzo);
 			if(nomeAttrezzo != null && partita.getLabirinto().getStanzaCorrente().addAttrezzo(attrezzo)) 
-				io.mostraMessaggio("Ho aggiunto " + nomeAttrezzo + " alla stanza " + 
+				this.getIo().mostraMessaggio("Ho aggiunto " + nomeAttrezzo + " alla stanza " + 
 			     partita.getLabirinto().getStanzaCorrente().getNome());
-			else io.mostraMessaggio("Non è stato aggiunto alcun attrezzo alla stanza " 
+			else this.getIo().mostraMessaggio("Non è stato aggiunto alcun attrezzo alla stanza " 
 			     + partita.getLabirinto().getStanzaCorrente().getNome());
 		}
 		if(attrezzo != null && partita.getGiocatore().getBorsa().getPeso()+attrezzo.getPeso()>partita.getGiocatore().getBorsa().getPesoMax()) 
-			io.mostraMessaggio("Non ho aggiunto " + nomeAttrezzo + " alla stanza " 
+			this.getIo().mostraMessaggio("Non ho aggiunto " + nomeAttrezzo + " alla stanza " 
 		+ partita.getLabirinto().getStanzaCorrente().getNome() + " perchè la stanza è piena");
 	}
 
@@ -34,11 +32,6 @@ public class ComandoPosa implements Comando {
 	@Override
 	public String getParametro() {
 		return this.nomeAttrezzo;
-	}
-
-	@Override
-	public void setIO(IO io) {
-		this.io = io;
 	}
 
 	@Override

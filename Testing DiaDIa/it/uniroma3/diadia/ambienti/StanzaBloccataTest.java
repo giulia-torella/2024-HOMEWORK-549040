@@ -8,29 +8,29 @@ import org.junit.Test;
 public class StanzaBloccataTest {
 	
 	public Stanza setupNonBloccata() {
-		Stanza stanzaNonBloccata = new StanzaBloccata("Atrio", "est", "piedediporco");
+		Stanza stanzaNonBloccata = new StanzaBloccata("Atrio", Direzione.valueOf("est"), "piedediporco");
 		Attrezzo piedediporco = new Attrezzo("piedediporco", 2);
 		stanzaNonBloccata.addAttrezzo(piedediporco);
 		Stanza s = new Stanza("Aula N11");
-		stanzaNonBloccata.impostaStanzaAdiacente("est", s);
+		stanzaNonBloccata.impostaStanzaAdiacente(Direzione.valueOf("est"), s);
 		return stanzaNonBloccata;
 	}
 	
 	public Stanza setupBloccata() {
-		Stanza stanzaNonBloccata = new StanzaBloccata("Atrio", "est", "piedediporco");
+		Stanza stanzaNonBloccata = new StanzaBloccata("Atrio", Direzione.valueOf("est"), "piedediporco");
 		Stanza s = new Stanza("Aula N11");
-		stanzaNonBloccata.impostaStanzaAdiacente("est", s);
+		stanzaNonBloccata.impostaStanzaAdiacente(Direzione.valueOf("est"), s);
 		return stanzaNonBloccata;
 	}
 
 	@Test
 	public void testStanzaNonBloccata() {
-		assertNotEquals(setupNonBloccata().getNome(), setupNonBloccata().getStanzaAdiacente("est").getNome());
+		assertNotEquals(setupNonBloccata().getNome(), setupNonBloccata().getStanzaAdiacente(Direzione.valueOf("est")).getNome());
 	}
 	
 	@Test
 	public void testStanzaBloccata() {
-		assertEquals(setupBloccata().getNome(), setupBloccata().getStanzaAdiacente("est").getNome());
+		assertEquals(setupBloccata().getNome(), setupBloccata().getStanzaAdiacente(Direzione.valueOf("est")).getNome());
 	}
 
 }

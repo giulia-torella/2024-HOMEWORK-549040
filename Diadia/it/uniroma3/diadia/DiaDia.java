@@ -1,6 +1,9 @@
 package it.uniroma3.diadia;
+
+import java.util.Scanner;
+
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+
 import it.uniroma3.diadia.comandi.*;
 
 /**
@@ -60,30 +63,10 @@ public class DiaDia {
 	}
 
 
-	public static void main(String[] argc) {
-		IO console = new IOConsole();
-		Labirinto labirinto = new LabirintoBuilder()
-										.addStanzaIniziale("Atrio")
-										.addAttrezzo("osso", 1)
-										.addStanzaVincente("Biblioteca")
-										.addStanzaMagica("Aula N11")
-										.addAttrezzo("piedediporco", 2)
-										.addStanzaBloccata("Aula N10", "piedediporco", "est")
-										.addAttrezzo("lanterna", 3)
-										.addStanzaBuia("Laboratorio Campus", "lanterna")
-										.addAdiacente("Atrio", "Biblioteca", "nord")
-										.addAdiacente("Atrio", "Aula N11", "est")
-										.addAdiacente("Atrio", "Aula N10", "sud")
-										.addAdiacente("Atrio", "Laboratorio Campus", "ovest")
-										.addAdiacente("Aula N11", "Laboratorio Campus", "est")
-										.addAdiacente("Aula N11", "Atrio", "ovest")
-										.addAdiacente("Aula N10", "Atrio", "nord")
-										.addAdiacente("Aula N10", "Aula N11", "est")
-										.addAdiacente("Aula N10", "Laboratorio Campus", "ovest")
-										.addAdiacente("Laboratorio Campus", "Atrio", "est")
-										.addAdiacente("Laboratorio Campus", "Aula N11", "ovest")
-										.addAdiacente("Biblioteca", "Atrio", "sud")
-										.getLabirinto();
+	public static void main(String[] argc) throws Exception {
+		Scanner scanner = new Scanner(System.in);
+		IO console = new IOConsole(scanner);
+		Labirinto labirinto = Labirinto.newBuilder("labirinto3.txt").getLabirinto();
 		DiaDia gioco = new DiaDia(console, labirinto);
 		gioco.gioca();
 	}

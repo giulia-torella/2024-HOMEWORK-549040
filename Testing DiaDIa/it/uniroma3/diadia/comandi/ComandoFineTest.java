@@ -23,10 +23,10 @@ public class ComandoFineTest {
 	}
 
 	@Test
-	public void testPartitaFine() {
+	public void testPartitaFine() throws Exception {
 		daLeggere.add("fine");
 
-		IOSimulator io = Simulatore.simulazionePartita3(daLeggere);
+		IOSimulator io = Simulatore.Gioco2(daLeggere);
 		assertTrue(io.hasNextMessaggio());
 		assertEquals(DiaDia.mostraMessaggioBenvenuto(), io.nextMessaggio());
 		assertTrue(io.hasNextMessaggio());

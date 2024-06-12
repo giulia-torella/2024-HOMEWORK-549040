@@ -1,8 +1,10 @@
 package it.uniroma3.diadia.giocatore;
 
+import it.uniroma3.diadia.Proprieta;
+
 public class Giocatore {
 	
-	static final private int CFU_INIZIALI = 20;
+	static final private int CFU_INIZIALI = Proprieta.getCFU();
 	private int cfu; // cfu posseduti
 	private Borsa borsa;
 	

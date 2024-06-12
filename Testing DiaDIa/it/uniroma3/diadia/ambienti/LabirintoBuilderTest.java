@@ -2,18 +2,19 @@ package it.uniroma3.diadia.ambienti;
 
 import static org.junit.Assert.*;
 
+import it.uniroma3.diadia.ambienti.Labirinto.LabirintoBuilder;
+
 import org.junit.Before;
 import org.junit.Test;
 
 public class LabirintoBuilderTest {
 	
-	LabirintoBuilder maze;
+	Labirinto.LabirintoBuilder maze;
 	Stanza room;
 	
 	@Before
-	public void setUp() {
-		maze = new LabirintoBuilder();
-		room = new Stanza("Atrio");
+	public void setUp() throws Exception {
+		maze = new LabirintoBuilder("labirinto1.txt");
 	}
 	
 	@Test
